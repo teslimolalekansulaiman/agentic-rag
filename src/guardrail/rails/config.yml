@@ -1,0 +1,11 @@
+models:
+  - type: main
+    engine: ollama
+    model: gemma3:4b
+    parameters:
+      temperature: 0.2
+
+rails:
+  config_files:
+    - rails.yml
+    - prompt_injection.yml

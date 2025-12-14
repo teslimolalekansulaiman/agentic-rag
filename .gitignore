@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.env/
+.env.*
+.venv/
+
+# FastAPI / ASGI
+*.log
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+
+# Docker
+*.pid
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.local
+.env.production
+
+# Supabase / local DB
+supabase/
+*.sqlite3

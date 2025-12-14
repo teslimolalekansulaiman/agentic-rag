@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "your-project"
+version = "0.1.0"
+description = "Your RAG ingestion and retrieval pipeline"
+requires-python = ">=3.10"
+authors = [
+  { name="Teslim sulaiman", email="teslimsulaiman@gmail.com.com" }
+]
+
+dependencies = [
+  # --- Core ingestion & API stack ---
+  "docling>=1.20.0",
+  "docling-core>=1.20.0",
+  "fastapi>=0.111",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.2",
+  "python-dotenv>=1.0",
+  "typer>=0.12",
+  "requests>=2.32",
+  "pandas>=2.2",
+  "numpy>=1.26.4",
+  "scikit-learn>=1.5",
+  "datasets>=2.20",
+  # --- Database & vector search ---
+  "pgvector>=0.2.5",
+  "psycopg2-binary>=2.9",
+  "sqlalchemy>=2.0",
+  "faiss-cpu==1.7.4",
+  # --- ML / embeddings / tokenization ---
+  "sentence-transformers>=2.7",
+  "transformers>=4.44.2",
+  "tokenizers>=0.19.1",
+  "tiktoken>=0.7",
+  "torch==2.4.1; platform_system == 'Darwin' and platform_machine == 'arm64'",
+  # --- Evaluation & observability ---
+  "ragas>=0.1.14",
+  "crewai>=0.51.1",
+  "arize-phoenix-otel>=0.10.0",
+  # --- LlamaIndex (consistent 0.12.x family) ---
+  "llama-index>=0.12.41,<0.13",
+  "llama-index-core>=0.12.41,<0.13",
+  "llama-index-vector-stores-faiss>=0.4.0",
+  "llama-index-embeddings-ollama>=0.6.0",
+  "llama-index-llms-ollama>=0.6.0",
+  # --- OpenAI API ---
+  "openai~=1.109.1",
+  "huggingface>=0.0.1",
+  "postgres>=4.0",
+  "llama-index-vector-stores-postgres>=0.5.5",
+  "llama-index-storage-docstore-postgres>=0.3.1",
+  "crewai-tools>=0.75.0",
+  "langchain-ollama>=0.1.0",
+  "arize-phoenix>=3.9.0",
+  "openinference-instrumentation-langchain>=0.1.0",
+  "openinference-instrumentation-llama-index>=0.1.0",
+  "openinference-instrumentation-crewai>=0.1.0",
+]

@@ -1,0 +1,72 @@
+# --- Core ingestion & API stack ---
+docling>=1.20.0
+docling-core>=1.20.0
+fastapi>=0.111
+uvicorn[standard]>=0.30
+pydantic==2.11.10
+pydantic-settings>=2.2
+python-dotenv>=1.0
+typer>=0.12
+requests>=2.32
+pandas>=2.2
+numpy==1.26.4
+scikit-learn>=1.5
+datasets>=4.1.1
+pyarrow==21.0.0
+
+# --- Database & vector search ---
+pgvector>=0.2.5
+psycopg2-binary>=2.9.9        # ✅ Required by llama-index & others
+psycopg[binary]>=3.2.1        # ✅ For newer code
+sqlalchemy>=2.0
+
+# --- ML / embeddings / tokenization ---
+sentence-transformers>=2.7
+transformers>=4.44.2
+tokenizers>=0.19.1
+tiktoken>=0.7
+torch==2.4.1                  # ✅ FIXED: Actual stable version
+torchvision==0.19.1           # ✅ FIXED: Matches torch 2.4.1
+torchaudio==2.4.1             # ✅ FIXED: Matches torch 2.4.1
+
+# --- Evaluation & observability ---
+ragas>=0.1.14
+crewai==0.201.1
+crewai-tools==0.75.0
+arize-phoenix>=3.9.0
+openinference-instrumentation-langchain>=0.1.0
+openinference-instrumentation-llama-index>=0.1.0
+openinference-instrumentation-crewai>=0.1.0
+arize-phoenix-otel>=0.10.0
+
+# --- LlamaIndex ---
+llama-index==0.12.41
+llama-index-core>=0.12.41,<0.13.0
+llama-index-vector-stores-postgres>=0.5.5,<0.6.0
+llama-index-storage-docstore-postgres>=0.3.1,<0.4.0
+llama-index-embeddings-ollama>=0.6.0,<0.7.0
+llama-index-embeddings-huggingface==0.5.0
+llama-index-llms-ollama>=0.6.2,<0.7.0
+pypdf==5.9.0
+
+# --- OpenAI / Ollama / Guardrails ---
+openai~=1.109.1
+ollama>=0.1.9
+nemoguardrails>=0.7.1
+
+# --- NLP tools ---
+nltk==3.9.1
+
+# --- Other utilities ---
+opencv-python-headless==4.11.0.86
+tenacity>=8.2.0,<9.0.0
+certifi~=2025.8.3
+
+# --- LangChain ---
+langchain>=0.3.0
+langchain-ollama>=0.1.0
+langchain-community~=0.3.21
+starlette~=0.45.3
+
+faiss-cpu==1.9.0
+open-webui>=0.6.32

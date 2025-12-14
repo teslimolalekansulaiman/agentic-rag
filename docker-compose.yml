@@ -1,0 +1,70 @@
+services:
+  # --- Database (Postgres + pgvector)
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: rag_postgres
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # --- Arize Phoenix (observability/tracing)
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    container_name: rag_phoenix
+    ports:
+      - "6006:6006"   # UI: http://localhost:6006
+    restart: unless-stopped
+
+  # --- Open WebUI (chat interface)
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: rag_openwebui
+    ports:
+      - "3000:8080"   # UI: http://localhost:3000
+    environment:
+      - OPENAI_API_BASE_URL=http://rag-api:8000/v1
+      - OPENAI_API_KEY=anything
+      - CHROMA_OPENAI_API_KEY=anything
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - openwebui:/app/backend/data
+    restart: unless-stopped
+
+  # --- Your CrewAI RAG API
+  rag-api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    container_name: crewai_rag_api
+    env_file: .env
+    environment:
+      PG_HOST: postgres
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      PHOENIX_HOST: http://phoenix:6006
+    ports:
+      - "8000:8000"   # API: http://localhost:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      phoenix:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  openwebui:
