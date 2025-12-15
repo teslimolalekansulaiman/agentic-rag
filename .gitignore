@@ -43,6 +43,7 @@ dist/
 .env
 .env.local
 .env.production
+.webui_secret_key
 
 # Supabase / local DB
 supabase/
